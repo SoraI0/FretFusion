@@ -1,0 +1,319 @@
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none; 
+}
+
+ul,
+ol,
+li {
+	list-style: none;
+    font-size: 24px;
+}
+
+img {
+	vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: inherit;
+	font-size: inherit;
+}
+
+html,
+body {
+	height: 100%;
+	line-height: 1;
+	font-size: 24px;
+	color: white;
+	background-color: #fafafa;
+	font-weight: 500;
+    font-family: "CenturyGothic";
+    user-select: none;
+}
+
+.btn {
+    background-color: #ffc898;
+    color: #ffffff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    transition: 0.3s;
+    
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    color: #ffc898;
+}
+
+@font-face {
+    font-family: CenturyGothic;
+    src:url('./fonts/centurygothic.ttf');
+    font-weight: 400; 
+}
+
+@font-face {
+    font-family: CenturyGothic;
+    src:url('./fonts/centurygothic_bold.ttf');
+    font-weight: 700; 
+}
+/* ---------------------------------------------------------------- */
+:root {
+    --hover-link-color: #ffc898;
+  }
+  
+
+body {
+    background-color: #181818;
+}
+
+a {
+    color: white;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--hover-link-color);
+    
+}
+
+.container {
+    
+    
+}
+
+.wrapper {
+    max-width: 1480px;
+    margin: 0 auto;
+    /* border-left: solid 1px white;
+    border-right: solid 1px white; */
+    
+    height: 100%;
+}
+
+    .header {
+        
+    }
+
+        .header__inner {
+            padding: 0 100px;
+            padding-top: 24px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+            .header__logo {
+                display: flex;
+            }
+
+                .header__logo img {
+                    width: 200px;
+                }
+
+            .header__nav {
+                display: flex;
+                align-items: center;
+            }
+
+                .header__list {
+                    display: flex;
+                    gap: 54px;
+                }
+
+                    .header__list-item {
+                        
+                    }
+
+                    .header__list-item--active {
+                        color: var(--hover-link-color);
+                    }
+                
+                .header__menu-btn {
+                    display: none;
+                }
+
+
+/* ----------------------METRONOME-------------------------------------- */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 15rem;
+  }
+
+.metronome {
+    margin-top: 300px;
+}
+
+    .metronome__inner {
+        display: flex;
+        justify-content: center;
+    }
+
+        .metronome__block{ 
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 700;
+            
+        }
+
+            .metronome__beats{
+                font-size: 82px;
+                color: var(--hover-link-color);
+                margin-bottom: 37px;
+            }
+
+                .metronome__beats-set{
+                    display: flex;
+                    gap: 28px;
+                    align-items: center;
+                    margin-bottom: 30px;
+                }
+
+                    .metronome__beats-choice {
+                        font-size: 37px;
+                        border: solid 6px white;
+                        border-radius: 100%;
+                        display: block;
+                        width: 50px;
+                        height: 50px;
+                        text-align: center;
+                        cursor: pointer;
+                        transition: 0.3s;
+                    }
+
+                    .metronome__beats-choice:hover {
+                        border-color: var(--hover-link-color);
+                    }
+
+
+                    .metronome__bpm{
+                        display: flex;
+                        gap: 10px;
+                        font-size: 48px;
+                        font-weight: 700;
+                    }
+
+                        .metronome__bpm-num {
+
+                        }
+
+                .metronome__bpm-range-border {
+                    padding: 0 5px;
+                    border-left: solid 1px var(--hover-link-color);
+                    border-right: solid 1px var(--hover-link-color);
+                    display: flex;
+                    align-items: center;
+                    height: 20px;
+                    margin-bottom: 30px;
+                }
+
+                    
+
+                    .metronome__bpm-range[type="range"]::-webkit-slider-thumb {
+                        -webkit-appearance: none; /* Override default look */
+                        appearance: none;
+                        margin-top: -6px; /* Centers thumb on the track */
+                        background-color: var(--hover-link-color);
+                        height: 1rem;
+                        width: 0.5rem;    
+                    }
+
+                    .metronome__bpm-range[type="range"]::-webkit-slider-runnable-track {
+                        background-color: #ffffff;
+                        border-radius: 0rem;
+                        height: 0.5rem;  
+                    }
+
+                .metronome__start {
+                    margin-bottom: 20px;
+                } 
+
+                .metronome__slog-set {
+                    font-size: 48px;
+                    display: flex;
+                    flex-direction: column;
+                    
+                }
+
+                    .metronome__slog-set-choice {
+                        transform: rotate(-90deg);
+                        color: var(--hover-link-color);
+                        cursor: pointer;
+                        margin: -10px 0;
+                        transition: 0.3s;
+                    }
+
+                    .metronome__slog-set-choice:hover {
+                        color: white;
+                    }
+
+                    .metronome__slog-num {
+                        
+                    }
+
+/* ----------Tuner----------------------------------------- */
+
+.tuner {
+
+}
+
+    .tuner__inner { 
+        margin-top: 250px;
+        display: flex;
+        justify-content: center;
+    }
+
+        .tuner__block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .tuner__note {
+                font-size: 82px;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+
+            .tuner__pointer {
+                transform: rotate(90deg);
+                color: var(--hover-link-color);
+            }
+
+            .tuner__scale {
+                display: flex;
+                gap: 6px
+            }
+
+                .tuner__scale-point {
+                    display: block;
+                    width: 3px;
+                    height: 50px;
+                    background-color: white;
+                    
+                }
+
+                .tuner__scale-point--active {
+                    background-color: var(--hover-link-color);
+                }
+
+            .tuner__hz {
+                margin-top: 30px;
+            }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@100;200;300;400;600&display=swap" rel="stylesheet">
+    
+    <title>Метроном</title>
+    
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="container header__inner">
+            <div class="header__logo">
+                <a href="./index.html"><img src="./images/logo.png" alt="Logo"></a>
+            </div>
+            
+            <nav class="header__nav">
+                <ul class="header__list">
+                    <a href="./songs.html"><li class="header__list-item">Пісні</li></a>
+                    <a href="./theory.html"><li class="header__list-item">Теорія</li></a>
+                    <a href="./tuner.html"><li class="header__list-item">Тюнер</li></a>
+                    <a href="./metronome.html"><li class="header__list-item header__list-item--active">Метроном</li></a>
+                </ul>
+                <div class="header__menu-btn">
+                    <img src="./images/hamburger.png" alt="MENU">
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="metronome">
+        <div class="container metronome__inner">
+            <div class="metronome__block">
+                <p class="metronome__beats">1</p>
+                <div class="metronome__beats-set">
+                    <div class="metronome__beats-choice">-</div>
+                    <div class="metronome__bpm"><div class="metronome__bpm-num">120</div><span>bpm</span></div>
+                    <div class="metronome__beats-choice">+</div>
+                </div>
+                <div class="metronome__bpm-range-border"><input class="metronome__bpm-range" type="range" min="30" max="320" value="120" step="1"></div>
+                <a href="#" class="metronome__start btn" id="stop">Старт</a>
+                <div class="metronome__slog-set">
+                    <div class="metronome__slog-set-choice">></div>
+                    <div class="metronome__slog-num">4</div>
+                    <div class="metronome__slog-set-choice"><</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./metronome.js"></script>
+</div>
+</body>
+</html>
