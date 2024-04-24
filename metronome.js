@@ -38,6 +38,7 @@ btn.addEventListener('click', function() {
         player_a.muted = true
         player_b.muted = true
         btn.id = 'stop'
+        btn.textContent = 'Старт'
         breake
     }
     
@@ -45,6 +46,7 @@ btn.addEventListener('click', function() {
         player_a.muted = false
         player_b.muted = false
         btn.id = 'play'
+        btn.textContent = 'Стоп'
     }
 })
 
