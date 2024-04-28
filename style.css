@@ -299,7 +299,7 @@ input[type="range"] {
 
             .tuner__scale {
                 display: flex;
-                gap: 6px
+                gap: 2px
             }
 
                 .tuner__scale-point {
@@ -311,7 +311,7 @@ input[type="range"] {
                 }
 
                 .tuner__scale-point--active {
-                    background-color: var(--hover-link-color);
+                    background-color: red;
                 }
 
             .tuner__hz {

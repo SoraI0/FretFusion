@@ -1,79 +1,81 @@
+import autoCorrelate from "./autocorrelate.js";
 
-function startPitchDetection()
-{
-    navigator.mediaDevices.getUserMedia ({audio: true})
-        .then((stream) =>
-        {
-            microphoneStream = audioCtx.createMediaStreamSource(stream);
-            microphoneStream.connect(analyserNode);
+const audioCtx = new window.AudioContext();
+const freqDisplay = document.querySelector('#freq')
+const scale = document.querySelectorAll('.tuner__scale-point')
+console.log(scale.length);
+let analyserNode = audioCtx.createAnalyser();
 
-            audioData = new Float32Array(analyserNode.fftSize);
-            corrolatedSignal = new Float32Array(analyserNode.fftSize);
+const noteStrings = [
+  "C",
+  "C#",
+  "D",
+  "D#",
+  "E",
+  "F",
+  "F#",
+  "G",
+  "G#",
+  "A",
+  "A#",
+  "B",
+];
 
-            setInterval(() => {
-                analyserNode.getFloatTimeDomainData(audioData);
-
-                let pitch = getAutocorrolatedPitch();
-
-                frequencyDisplayElement.innerHTML = `${pitch.toFixed(2)}`;
-            }, 300);
-        })
-        .catch((err) =>
-        {
-            console.log(err);
-        });
+function getNoteFromPitchFrequency(freq) {
+  return Math.round(12 * (Math.log(freq / 440) / Math.log(2))) + 69;
 }
 
-startPitchDetection()
+function getPitchFrequencyFromNote(note) {
+  return 440 * Math.pow(2, (note - 69) / 12);
+}
 
-function getAutocorrolatedPitch()
-{
-    // First: autocorrolate the signal
+function centsOffPitch(frequencyPlayed, correctFrequency) {
+  return Math.floor(
+    (1200 * Math.log(frequencyPlayed / correctFrequency)) / Math.log(2)
+  );
+}
 
-    let maximaCount = 0;
+async function setupMic() {
+  const mic = await navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: false,
+  });
+  return mic;
+}
 
-    for (let l = 0; l < analyserNode.fftSize; l++) {
-        corrolatedSignal[l] = 0;
-        for (let i = 0; i < analyserNode.fftSize - l; i++) {
-            corrolatedSignal[l] += audioData[i] * audioData[i + l];
-        }
-        if (l > 1) {
-            if ((corrolatedSignal[l - 2] - corrolatedSignal[l - 1]) < 0
-                && (corrolatedSignal[l - 1] - corrolatedSignal[l]) > 0) {
-                localMaxima[maximaCount] = (l - 1);
-                maximaCount++;
-                if ((maximaCount >= localMaxima.length))
-                    break;
-            }
-        }
+async function start() {
+  let tuningValueInput;
+  const buffer = new Float32Array(analyserNode.fftSize);
+  const mediaStream = await setupMic();
+  const mediaSource = audioCtx.createMediaStreamSource(mediaStream);
+  mediaSource.connect(analyserNode);
+  analyserNode.getFloatTimeDomainData(buffer);
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+
+  function getSoundData() {
+    analyserNode.getFloatTimeDomainData(buffer);
+    const frequency = autoCorrelate(buffer, audioCtx.sampleRate);
+    freqDisplay.textContent = frequency.toFixed(0)
+
+    if (frequency > -1) {
+      const midiPitch = getNoteFromPitchFrequency(frequency);
+      console.log(midiPitch);
+      const playingNote = noteStrings[midiPitch % 12];
+      document
+        .getElementById("playing-note")
+        .replaceChildren(document.createTextNode(playingNote));
+      const hzOffPitch = centsOffPitch(
+        frequency,
+        getPitchFrequencyFromNote(midiPitch)
+      );
     }
-
-    // Second: find the average distance in samples between maxima
-
-    let maximaMean = localMaxima[0];
-
-    for (let i = 1; i < maximaCount; i++)
-        maximaMean += localMaxima[i] - localMaxima[i - 1];
-
-    maximaMean /= maximaCount;
-
-    return audioCtx.sampleRate / maximaMean;
+    return frequency
+  }
+  
+  
+  setInterval(getSoundData, 10);
 }
 
-
-
-navigator.mediaDevices.getUserMedia({audio: true})
-.then((stream) => {
-  /* use the stream */
-})
-.catch((err) => {
-  /* handle the error */
-});
-
-let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-let microphoneStream = null;
-let analyserNode = audioCtx.createAnalyser()
-let audioData = new Float32Array(analyserNode.fftSize);;
-let corrolatedSignal = new Float32Array(analyserNode.fftSize);;
-let localMaxima = new Array(10);
-const frequencyDisplayElement = document.querySelector('.tuner__hz span');
+start();
