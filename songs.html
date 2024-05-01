@@ -33,7 +33,41 @@
         </div>
         
     </header>
-</div>
+    <section class="hide songs">
+        <div class="container songs__inner">
+            <h1 class="title songs__title">Назва пісні</h1>
+            <ol class="song-list">
+                <a href="#"><li id="song" class="songs__song">Скрябін - Сам собі країна</li></a>
+                <a href="#"><li id="song" class="songs__song">Ling Tosite Sigure - Missing ling</li></a>
+                <a href="#"><li id="song" class="songs__song">Володимир Івасюк - Пісня буде поміж нас</li></a>
+                <a href="#"><li id="song" class="songs__song">Скрябін - Старі фотографії</li></a>
+                <a href="#"><li id="song" class="songs__song">Скрябін - Люди, як кораблі</li></a>
+                <a href="#"><li id="song" class="songs__song">TK from Ling Tosite Sigure - white silence</li></a>
+                <a href="#"><li id="song" class="songs__song">Скрябін - Цукор</li></a>
+                <a href="#"><li id="song" class="songs__song">Mika - Rain</li></a>
+                <a href="#"><li id="song" class="songs__song">TK from Ling Tosite Sigure - Unravel</li></a>         
+            </ol>
+            <a href="./create-chords.html" class="btn songs__btn">Додати акорди до пісні</a>
+        </div>
+        
 
+    </section>
+
+    <section class="current-song">
+        <div class="container current-song__inner">
+            <h1 class="title current-song__title">"назва пісні"</h1>
+            <div class="current-song__play-section play-section">
+                <div class="play-section__chord">G</div>
+                <div class="play-section__song-text">Lorem ipsum dolor sit amet consectetur adipisicing elit</div>
+
+                
+                <div class="playing-note">Ви граєте акорд <span id="playing-note"></span></div>
+            </div>
+        </div>
+    </section>
+</div> 
+
+<script src="./database.js" type="module"></script>
+<script src="./tuner.js" type="module"></script>
 </body>
 </html>
