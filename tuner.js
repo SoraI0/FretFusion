@@ -1,11 +1,11 @@
 import autoCorrelate from "./autocorrelate.js";
+import {rowData} from "./database.js"
 
 
 
   const audioCtx = new window.AudioContext();
   const freqDisplay = document.querySelectorAll('#freq .playing-note')
   const scale = document.querySelectorAll('.tuner__scale-point')
-  console.log(scale.length);
   let analyserNode = audioCtx.createAnalyser();
   
   
@@ -45,6 +45,10 @@ import autoCorrelate from "./autocorrelate.js";
     });
     return mic;
   }
+
+
+  let needNote = document.querySelector('.play-section__chord')
+  const songText = document.querySelector('.play-section__song-text')
   
   async function start() {
     const buffer = new Float32Array(analyserNode.fftSize);
@@ -57,6 +61,8 @@ import autoCorrelate from "./autocorrelate.js";
     }
 
     
+    
+
 
     function getSoundData() {
       analyserNode.getFloatTimeDomainData(buffer);
@@ -66,28 +72,27 @@ import autoCorrelate from "./autocorrelate.js";
       if (frequency > -1) {
         const midiPitch = getNoteFromPitchFrequency(frequency);
         const playingNote = noteStrings[midiPitch % 12];
-        const needNote = document.querySelector('.play-section__chord')
+        
+        
         nName = playingNote;
-        console.log(nName);
+        
         document
           .getElementById("playing-note")
           .replaceChildren(document.createTextNode(playingNote));
-
-          if (playingNote === needNote.textContent) {
+          
+          if (playingNote === needNote.textContent[0]) {
             setTimeout(()=>{
-              needNote.style.color = 'green'
-              setTimeout(()=>{
-                needNote.style.color = 'white'
-                needNote.textContent = 'F'
-              }, 1000)
+              if (playingNote === needNote.textContent[0]){
+                needNote.style.color = 'green'
+                needNote = document.querySelector('.play-section__chord')
+              }
             }, 1000)
-            
-            
           }
       } 
     }
     
+    
     setInterval(getSoundData, 10);
-
+    
   }
 start()

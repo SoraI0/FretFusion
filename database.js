@@ -37,7 +37,11 @@ function addData() {
     })
 }
 
-nextInput.addEventListener('click', addData)
+
+
+
+
+// nextInput.addEventListener('click', addData)
     
 // function updateData() {
 //     update(ref(firebase, songName + chordInput.value), {
@@ -63,7 +67,7 @@ nextInput.addEventListener('click', addData)
 
 // function retData() {
 //     const firebaseRef = ref(firebase)
-//     get(child(firebaseRef, 'Songs/'+ songName.value + '/' + rowCount)).then((snapshot)=>{
+//     get(child(firebaseRef, 'Songs'+ songName.value + '/' + rowCount)).then((snapshot)=>{
 //         if(snapshot.exists()) {
 //             chordInput.value = snapshot.val().chord
 //             textInput.value = snapshot.val().text
@@ -77,7 +81,29 @@ nextInput.addEventListener('click', addData)
 //     })
 // }
 
-// retData()
+
+
+export async function rowData(row) {
+    const firebaseRef = ref(firebase)
+
+    let chord = await get(child(firebaseRef, 'Songs/Володимир Івасюк - Пісня буде поміж нас/' + row + '/chord'))
+
+    let text = await get(child(firebaseRef, 'Songs/Володимир Івасюк - Пісня буде поміж нас/' + row + '/text'))
+    row++
+    return [chord.val(), text.val()]
+}
+
+
+// rowData().then((data)=> {
+//     console.log(data);
+// })
+
+
+
+
+
 
 // const songList = document.querySelectorAll('.song')
 // console.log(songList); 
+
+
